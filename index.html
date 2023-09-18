@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <!--<meta name="viewport" content="width= , initial-scale=1.0">-->
+    <link rel="stylesheet" href="style.css">
+   
+   <!---- <script src="myscript.js"></script>--->
+    <title>Dad Jokes Generator</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">Dad Jokes Generator</h1>
+        <p class="joke" id="joke">Dad Joke</p>
+        <button class="btn" id="btn">Tell me a joke</button>
+    </div>
+
+
+    <script>
+    const btnE = document.getElementById('btn');
+    const btn1 = document.getElementById('joke');
+ 
+    const apiKey = "NqB1EAhAXnhCIXr1wzDleg==DJuGsN7RFtjTEYhB";
+       
+    const options = {
+        method: "GET",
+        headers: {
+            "X-Api-Key": apiKey,},
+        };
+
+    const apiURL = "https://api.api-ninjas.com/v1/dadjokes?limit=1" ;
+
+        
+
+    async function getJoke(){
+             
+            try {
+                btn1.innerText = "Updating...";
+            
+            btnE.disabled = true;
+            btnE.innerText = "Loading..."
+
+            const response = await fetch(apiURL, options);
+            const data = await response.json();
+
+            btnE.disabled = false;
+            btnE.innerText = "TELL ME A JOKE";
+
+            btn1.innerText = data[0].joke;     
+            } 
+
+            catch (error) {
+                btn1.innerText = "There is no Internet";
+            
+            btnE.disabled = false;
+            btnE.innerText = "TELL ME A JOKE"
+            }
+        }
+        
+        btnE.addEventListener("click" , getJoke)
+        </script>
+
+
+
+</body>
+</html>
+
+
+<!---------this statement is used to show if u are offline
+    try{
+      
+    }catch(error){
+
+    }
+    
+    IN THIS PROJECT WE LEARN HOW TO FETCHES API 
+    
+    
+    --->
